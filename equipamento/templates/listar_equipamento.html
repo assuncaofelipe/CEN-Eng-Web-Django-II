@@ -1,11 +1,9 @@
 <table>
     <thead>
         <tr>
-            <th colspan="5" style="text-align: start">Alunos</th>
-            <th colspan="1" style="justify-content: end">
-                <a class="cad" href="{% url 'cadastrar_equipamento' %}">
-                    Cadastrar</a
-                >
+            <th>Alunos</th>
+            <th>
+                <a class="cad" href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
             </th>
         </tr>
         <tr>
@@ -17,18 +15,15 @@
     </thead>
     <tbody>
         {% for equipamento in equipamentos %}
-        <tr>
-            <th scope="row">{{ equipamento.id_equipamento }}</th>
-            <td>{{ equipamento.nome }}</td>
-            <td>{{ equipamento.patrimonio }}</td>
-            <td>
-                <a
-                    class="edit"
-                    href="{% url 'editar_equipamento' equipamento.id_equipamento %}"
-                    >Editar</a
-                >
-            </td>
-        </tr>
+            <tr>
+                <th scope="row">{{ equipamento.id_equipamento }}</th>
+                <td>{{ equipamento.nome }}</td>
+                <td>{{ equipamento.patrimonio }}</td>
+                <td>
+                    <a class="edit"
+                       href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a>
+                </td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>
