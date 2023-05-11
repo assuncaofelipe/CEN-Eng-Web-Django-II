@@ -17,7 +17,8 @@ class ListarEquipamento(ListView):
 class CadastrarEquipamento(CreateView):
     template_name = 'crud_equipamento.html'
     model = Equipamento
-    fields = ['nome', 'patrimonio']
+    fields = ['nome', 'patrimonio', 'codigo',
+              'situacao', 'observacao', 'status']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
@@ -30,7 +31,8 @@ class CadastrarEquipamento(CreateView):
 class EditarEquipamento(UpdateView):
     template_name = 'crud_equipamento.html'
     model = Equipamento
-    fields = ['nome', 'patrimonio']
+    fields = ['nome', 'patrimonio', 'codigo',
+              'situacao', 'observacao', 'status']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):

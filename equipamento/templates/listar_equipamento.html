@@ -1,15 +1,19 @@
 <table>
     <thead>
         <tr>
-            <th>Alunos</th>
+            <th>Equipamento</th>
             <th>
-                <a class="cad" href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
+                <a href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
             </th>
         </tr>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
             <th scope="col">patrimonio</th>
+            <th scope="col">Código</th>
+            <th scope="col">situacao</th>
+            <th scope="col">observacao</th>
+            <th scope="col">status</th>
             <th scope="col">Opções</th>
         </tr>
     </thead>
@@ -19,9 +23,12 @@
                 <th scope="row">{{ equipamento.id_equipamento }}</th>
                 <td>{{ equipamento.nome }}</td>
                 <td>{{ equipamento.patrimonio }}</td>
+                <td>{{ equipamento.codigo }}</td>
+                <td>{{ equipamento.situacao }}</td>
+                <td>{{ equipamento.observacao }}</td>
+                <td>{{ equipamento.status }}</td>
                 <td>
-                    <a class="edit"
-                       href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a>
+                    <a href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a>
                 </td>
             </tr>
         {% endfor %}
