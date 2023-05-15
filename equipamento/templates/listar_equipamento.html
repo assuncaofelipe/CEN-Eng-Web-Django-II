@@ -24,9 +24,9 @@
                 <td>{{ equipamento.nome }}</td>
                 <td>{{ equipamento.patrimonio }}</td>
                 <td>{{ equipamento.codigo }}</td>
-                <td>{{ equipamento.situacao }}</td>
+                <td>{{ equipamento.get_situacao_display }}</td>
                 <td>{{ equipamento.observacao }}</td>
-                <td>{{ equipamento.status }}</td>
+                <td>{{ equipamento.get_status_display }}</td>
                 <td>
                     <a href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a>
                 </td>
