@@ -21,3 +21,6 @@ class Equipamento(models.Model):
         choices=situacao_opcao, default="1", max_length=2)
     observacao = models.CharField(max_length=150)
     status = models.CharField(choices=status_opcao, default="1", max_length=2)
+
+    def __str__(self):
+        return self.nome
