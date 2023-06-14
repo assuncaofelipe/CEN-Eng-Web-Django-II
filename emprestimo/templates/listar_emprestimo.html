@@ -31,6 +31,7 @@
                 <td>{{ emprestimo.observacao }}</td>
                 <td>
                     <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
+                    <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Excluir</a>
                 </td>
             </tr>
         {% endfor %}
