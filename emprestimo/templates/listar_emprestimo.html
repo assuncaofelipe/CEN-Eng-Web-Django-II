@@ -1,39 +1,47 @@
-<table>
-    <thead>
-        <tr>
-            <th>Equipamento</th>
-            <th>
-                <a href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
-            </th>
-        </tr>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Matricula</th>
-            <th scope="col">Curso</th>
-            <th scope="col">Equipamento</th>
-            <th scope="col">Data</th>
-            <th scope="col">Data</th>
-            <th scope="col">Observações</th>
-            <th scope="col">Opções</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for emprestimo in emprestimos %}
+{% extends 'base.html' %}
+{% block conteudo %}
+    <form method="GET" action="{% url 'listar_emprestimo' %}">
+        <input type="text" name="search" placeholder="Pesquisar por nome do aluno ou equipamento">
+        <button type="submit">Pesquisar</button>
+    </form>
+    <a href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
+    <table>
+        <thead>
             <tr>
-                <th scope="row">{{ emprestimo.id_emprestimo }}</th>
-                <td>{{ emprestimo.nome }}</td>
-                <td>{{ emprestimo.matricula }}</td>
-                <td>{{ emprestimo.get_curso_display }}</td>
-                <td>{{ emprestimo.equipamento.nome }}</td>
-                <td>{{ emprestimo.data_emprestimo }}</td>
-                <td>{{ emprestimo.data_devolucao }}</td>
-                <td>{{ emprestimo.observacao }}</td>
-                <td>
-                    <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
-                    <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Excluir</a>
-                </td>
+                <th>Empréstimo</th>
+                <th>
+                    <a href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
+                </th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Equipamento</th>
+                <th scope="col">Data</th>
+                <th scope="col">Data</th>
+                <th scope="col">Observações</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprestimo in emprestimos %}
+                <tr>
+                    <th scope="row">{{ emprestimo.id_emprestimo }}</th>
+                    <td>{{ emprestimo.nome }}</td>
+                    <td>{{ emprestimo.matricula }}</td>
+                    <td>{{ emprestimo.get_curso_display }}</td>
+                    <td>{{ emprestimo.equipamento.nome }}</td>
+                    <td>{{ emprestimo.data_emprestimo }}</td>
+                    <td>{{ emprestimo.data_devolucao }}</td>
+                    <td>{{ emprestimo.observacao }}</td>
+                    <td>
+                        <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
+                        <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
