@@ -1,0 +1,38 @@
+<table>
+    <thead>
+        <tr>
+            <th>Equipamento</th>
+            <th>
+                <a href="{% url 'logout' %}">Sair</a>
+                <a href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
+                <a href="{% url 'listar_emprestimo' %}">Emprestimo</a>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">patrimonio</th>
+            <th scope="col">Código</th>
+            <th scope="col">situacao</th>
+            <th scope="col">observacao</th>
+            <th scope="col">status</th>
+            <th scope="col">Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipamento in equipamentos %}
+            <tr>
+                <th scope="row">{{ equipamento.id_equipamento }}</th>
+                <td>{{ equipamento.nome }}</td>
+                <td>{{ equipamento.patrimonio }}</td>
+                <td>{{ equipamento.codigo }}</td>
+                <td>{{ equipamento.get_situacao_display }}</td>
+                <td>{{ equipamento.observacao }}</td>
+                <td>{{ equipamento.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

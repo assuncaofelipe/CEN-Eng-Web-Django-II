@@ -1,0 +1,38 @@
+<table>
+    <thead>
+        <tr>
+            <th>Equipamento</th>
+            <th>
+                <a href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Equipamento</th>
+            <th scope="col">Data</th>
+            <th scope="col">Data</th>
+            <th scope="col">Observações</th>
+            <th scope="col">Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emprestimo in emprestimos %}
+            <tr>
+                <th scope="row">{{ emprestimo.id_emprestimo }}</th>
+                <td>{{ emprestimo.nome }}</td>
+                <td>{{ emprestimo.matricula }}</td>
+                <td>{{ emprestimo.get_curso_display }}</td>
+                <td>{{ emprestimo.equipamento.nome }}</td>
+                <td>{{ emprestimo.data_emprestimo }}</td>
+                <td>{{ emprestimo.data_devolucao }}</td>
+                <td>{{ emprestimo.observacao }}</td>
+                <td>
+                    <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

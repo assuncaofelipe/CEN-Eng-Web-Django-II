@@ -1,0 +1,9 @@
+<form method="post">
+    <h1>{{ title }} Empréstimo</h1>
+    {% if sem_equipamentos %}
+        <p>Não há equipamentos disponíveis no momento.</p>
+    {% else %}
+        {% csrf_token %} {{ form.as_p }}
+        <input class="btn bg-blue-500" type="submit" value="{{ title }}" />
+    {% endif %}
+</form>
