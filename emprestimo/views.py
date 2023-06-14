@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Emprestimo, Equipamento
+from django.db.models import Q
 
 
 @method_decorator(login_required, name='dispatch')
@@ -11,6 +12,16 @@ class ListarEmprestimo(ListView):
     template_name = 'listar_emprestimo.html'
     model = Emprestimo
     context_object_name = 'emprestimos'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('search')
+        if search_query:
+            queryset = queryset.filter(
+                Q(nome__icontains=search_query) |
+                Q(equipamento__nome__icontains=search_query)
+            )
+        return queryset
 
 
 @method_decorator(login_required, name='dispatch')
@@ -62,7 +73,7 @@ class EditarEmprestimo(UpdateView):
 class DeletarEmprestimo(DeleteView):
     model = Emprestimo
     template_name = 'deletar_emprestimo.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('listar_emprestimo')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

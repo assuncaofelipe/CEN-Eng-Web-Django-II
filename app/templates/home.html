@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+    <section>
+        <h1>CEN</h1>
+        <p>
+            O Controle de Equipamentos do Navir é uma solução de software para monitorar o empréstimo e gerenciar os
+            equipamentos do Núcleo de Automação, Visão Computacional, Inteligência Artificial e Robótica.
+        </p>
+        <img src="" alt="">
+    </section>
+    <section>
+        <a href="{% url 'listar_equipamento' %}">
+            <div>
+                <h2>Equipamento</h2>
+                <p>O CEN permite um registro de todos os equipamentos existentes no Navir.</p>
+            </div>
+        </a>
+        <a href="{% url 'listar_emprestimo' %}">
+            <div>
+                <h2>Empréstimo</h2>
+                <p>O CEN permite um controle de todos os equipamentos emprestados aos alunos.</p>
+        </div>
+        </a>
+    </section>
+{% endblock %}

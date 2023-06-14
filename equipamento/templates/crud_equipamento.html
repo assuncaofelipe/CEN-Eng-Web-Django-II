@@ -1,5 +1,8 @@
-<form method="post">
-    <h1>{{ title }} Equipamento</h1>
-    {% csrf_token %} {{ form.as_p }}
-    <input class="btn bg-blue-500" type="submit" value="{{ title }}" />
-</form>
+{% extends 'base.html' %}
+{% block conteudo %}
+    <form method="post">
+        <h1>{{ title }} Equipamento</h1>
+        {% csrf_token %} {{ form.as_p }}
+        <input class="btn bg-blue-500" type="submit" value="{{ title }}" />
+    </form>
+{% endblock %}
