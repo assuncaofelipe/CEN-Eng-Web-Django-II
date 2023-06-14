@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Equipamento
@@ -38,4 +38,16 @@ class EditarEquipamento(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Editar"
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class DeletarEquipamento(DeleteView):
+    model = Equipamento
+    template_name = 'deletar_equipamento.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Excluir"
         return context
