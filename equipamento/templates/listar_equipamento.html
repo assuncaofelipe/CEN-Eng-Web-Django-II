@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+        <link rel="stylesheet" href="{% static 'css/tabelas.css' %}" />
+{% endblock %}
+
 {% block conteudo %}
     <form method="GET" action="{% url 'listar_equipamento' %}">
         <input type="text" name="search" placeholder="Pesquisar por nome ou código">
@@ -8,8 +15,8 @@
     <table>
         <thead>
             <tr>
-                <th>Equipamento</th>
-                <th>
+                <th colspan="6">Equipamento</th>
+                <th colspan="2">
                     <a href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
                 </th>
             </tr>
