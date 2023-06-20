@@ -10,6 +10,20 @@ html {
     font-family: "Poppins" !important;
 }
 
+/* .container {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    font-family: "Outfit";
+    color: #ffff;
+    display: flex;
+    background-color: #001D3D;
+    justify-content: center; /* Centralizar horizontalmente */
+    align-items: center; /* Centralizar verticalmente */
+    margin: 10px;
+    padding: 10px;
+} */
+
 table {
     width: 100%;
     text-align: center;
@@ -25,30 +39,57 @@ table a {
     padding: 10px;
     box-sizing: border-box;
     font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+table a:hover {
+    background-color: #ccc;
+
 }
 
 td,
 th {
     height: 60px;
     border-bottom: 1px solid black;
+    padding: 10px;
 }
+
+tr:nth-child(even) {
+    background-color: #346089;
+    color: #ffffff;
+}
+
+
+tr:nth-child(even) td {
+    color: #ffffff;
+}
+
+.cad a,
+.edit a,
+.delete a,
+.export a {
+    color: #0000;
+}
+
 
 .cad {
     background-color: #121c4d;
-    color: white;
+    color: #fff; /* Define a cor do texto para branco */
 }
 
 .edit {
     background-color: #ffbb33;
-    color: white;
+    color: #000; /* Define a cor do texto para preto */
 }
 
 .delete {
     background-color: #ff3547;
-    color: white;
+    color: #fff; /* Define a cor do texto para branco */
 }
 
 .export {
     background-color: #3CB371FF;
-    color: white;
+    color: #000; /* Define a cor do texto para preto */
 }

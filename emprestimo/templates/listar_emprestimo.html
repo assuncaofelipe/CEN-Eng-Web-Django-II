@@ -5,6 +5,7 @@
         <button type="submit">Pesquisar</button>
     </form>
     <a href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
+    <div class="container">
     <table>
         <thead>
             <tr>
@@ -44,4 +45,5 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
