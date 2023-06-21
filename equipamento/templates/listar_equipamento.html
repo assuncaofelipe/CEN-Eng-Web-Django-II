@@ -7,11 +7,16 @@
 {% endblock %}
 
 {% block conteudo %}
-    <form method="GET" action="{% url 'listar_equipamento' %}">
+
+
+<div class="search-container">
+    <form class="search-form" method="GET" action="{% url 'listar_equipamento' %}">
         <input type="text" name="search" placeholder="Pesquisar por nome ou código">
         <button type="submit">Pesquisar</button>
     </form>
-    <a href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
+    <a class="limpar-pesquisa" href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
+</div>
+
     
     <table>
         <thead>

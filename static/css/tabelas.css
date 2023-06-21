@@ -10,6 +10,8 @@ html {
     font-family: "Poppins" !important;
 }
 
+
+
 table {
     width: 80%;
     margin-left: auto; /* Centraliza a tabela horizontalmente */
@@ -80,4 +82,38 @@ tr:nth-child(even) td {
 .export {
     background-color: #3CB371FF;
     color: #000; /* Define a cor do texto para preto */
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form {
+    margin-right: 10px;
+}
+
+.search-form input {
+    padding: 10px;
+    border: 1px solid #ffffff; /* Adiciona uma borda de 1px sólida na cor branca */
+    border-radius: 10px;
+    background-color: #08223F;
+    color: #ffffff;
+}
+
+.search-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #346089;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.limpar-pesquisa {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #346089;
+    color: #ffffff;
+    text-decoration: none;
 }
