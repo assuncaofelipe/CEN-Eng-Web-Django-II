@@ -1,26 +1,84 @@
-
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %}
+
 {% block conteudo %}
-    <section>
+
+<section>
+  <div class="container1">
+    <div class="row">
+      <div class="col-8">
         <h1>CEN</h1>
-        <p>
-            O Controle de Equipamentos do Navir é uma solução de software para monitorar o empréstimo e gerenciar os
-            equipamentos do Núcleo de Automação, Visão Computacional, Inteligência Artificial e Robótica.
-        </p>
-        <img src="" alt="">
-    </section>
-    <section>
-        <a href="{% url 'listar_equipamento' %}">
-            <div>
-                <h2>Equipamento</h2>
-                <p>O CEN permite um registro de todos os equipamentos existentes no Navir.</p>
+        <h3>O Controle de Equipamentos do Navir é uma solução de software para monitorar o empréstimo e gerenciar os
+          quipamentos do Núcleo de Automação, Visão Computacional, Inteligência Artificial e Robótica.</h3>
+      </div>
+      <div class="col-4"><img src="{% static 'image/computer.png' %}"> </div>
+    </div>
+  </div>
+
+</section>
+<section>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card mb-3" style="max-width: 540px; background-color:#346089">
+        <div class="row g-0">
+
+          <div class="col-md-8">
+            <div class="card-body">
+              <a href="{% url 'listar_emprestimo' %}">
+              <h5 class="card-title">Empréstimo</h5>
+              <p style="text-align: justify" class="card-text">O CEN permite um controle de todos os equipamentos
+                emprestados aos alunos.</p>
+              </a>
             </div>
-        </a>
-        <a href="{% url 'listar_emprestimo' %}">
-            <div>
-                <h2>Empréstimo</h2>
-                <p>O CEN permite um controle de todos os equipamentos emprestados aos alunos.</p>
+          </div>
+          <div class="col-md-4">
+            <img src="{% static 'image/ok.png' %}" class="img-fluid rounded-start" alt="...">
+          </div>
         </div>
-        </a>
-    </section>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card mb-3" style="max-width: 540px; background-color:#18436B">
+        <div class="row g-0">
+
+          <div class="col-md-8">
+            <div class="card-body">
+              <a href="{% url 'listar_equipamento' %}">
+              <h5 class="card-title">Equipamento</h5>
+              <p style="text-align: justify" class="card-text">O CEN permite um registro de todos os equipamentos
+                existentes no Navir.</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="{% static 'image/equi.png' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card mb-3" style="max-width: 540px; background-color:#28394D">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Usuário</h5>
+              <p style="text-align: justify" class="card-text">É necessário um usuário pré-cadastrado para ter acesso ao
+                sistema.</p>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="{% static 'image/user.png' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
