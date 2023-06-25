@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200&display=swap");
 
+.row {
+  padding-left: 20px;  
+  padding-right: 20px;
+}
 
+::-webkit-scrollbar {
+  display: none;
+}
 
 h4 {
   text-align: justify;
