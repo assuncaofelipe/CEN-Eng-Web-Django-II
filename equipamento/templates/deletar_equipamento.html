@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-    <form method="post">
+    <form method="post" style="row-gap: 8px; display: flex; flex-direction: column; margin: 25px; align-items: center; justify-content: center;">
         <h1>{{ title }} Equipamento</h1>
         {% csrf_token %}
         <h3>Confirme para excluir definitivamente</h3>
         <p>Deseja excluir o {{ object }}?</p>
-        <input type="submit" value="EXCLUIR" />
+        <input type="submit" value="EXCLUIR" style="height: 30px; margin-top: 10px; width: 80px;"/>
     </form>
 {% endblock %}
