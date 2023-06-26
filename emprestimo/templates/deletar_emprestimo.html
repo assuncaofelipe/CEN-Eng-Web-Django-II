@@ -5,6 +5,6 @@
         {% csrf_token %}
         <h3>Confirme para excluir definitivamente</h3>
         <p>Deseja excluir o empréstimo com Id: {{ object.id_emprestimo }}?</p>
-        <input type="submit" value="EXCLUIR" style="height: 30px; margin-top: 10px; width: 80px;"/>
+        <input type="submit" value="EXCLUIR" style="cursor: pointer; height: 30px; margin-top: 10px; width: 80px;"/>
     </form>
 {% endblock %}
