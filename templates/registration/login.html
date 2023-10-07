@@ -1,43 +1,61 @@
 {% load static %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>login</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/login.css' %}"
+    />
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <section class="image-section">
+        <img class="image-login" src="/static/image/login.svg" />
+      </section>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-</head>
-<body>
+      <section class="form-section">
+        <div class="card auth-card">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-3">Login</h4>
 
-    <div class="row">
-        <section class="col-md-4 mt-5 offset-md-6">
-            <div class="card auth-card">
-                <div class="card-body">
-                    <h4 class="card-title text-center">Login</h4>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ next }}" />
 
-                    <form method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ next }}" />
+              {{ form|crispy }}
 
-                        {{ form|crispy }}
+              <div class="d-grid gap-2 mt-4">
+                <button
+                  type="submit"
+                  class="btn"
+                  style="color: white; background: #001d3d"
+                >
+                  Entrar
+                </button>
+              </div>
+            </form>
 
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Entrar
-                        </button>
-                    </form>
-                </div>
+            <div class="text-center mt-3">
+              <a href="/admin" class="link-admin">Cadastrar Usuário</a>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
     </div>
-</body>
+  </body>
 </html>
 {% endblock %}
