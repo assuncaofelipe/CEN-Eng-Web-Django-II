@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'equipamento',
     'emprestimo',
     'user',
+    'app',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200&display=swap");
+
+.row {
+  padding-left: 20px;  
+  padding-right: 20px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+h4 {
+  text-align: justify;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-size: 1.5rem;
+}
+
+p,
+h5 {
+  color: white;
+  margin: 2%;
+  margin-left: 12%;
+  font-weight: 500;
+  line-height: 1.2;
+
+}
+
+
+.left-login {
+  position: relative;
+  margin: 2%;
+  margin-left: auto;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #18436B;
+}
+
+
+.left-home {
+  /* width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  background-color: #08223F;
+
+}
+
+
+.right-home {
+  position: relative;
+  width: 30%;
+  display: flex;
+
+  background-color: #08223F;
+}
+
+.right-login {
+  position: relative;
+  margin: 2%;
+  margin-left: 2%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #346089;
+}
+
+.center-login {
+  position: relative;
+  margin: 2%;
+  margin-left: auto;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #28394D;
+}
+
+.card-title {
+  margin-bottom: 0.75rem
+}
+
+.card-text:last-child {
+  margin-bottom: 0
+}
+
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px
+}
+
+.container1 {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #08223F;
+}
+
+.col-8,
+.col-4 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px
+}
+
+.col-md-8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+}
+
+.col-md-4 {
+  position: relative;
+  width: 30%;
+  display: flex;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}

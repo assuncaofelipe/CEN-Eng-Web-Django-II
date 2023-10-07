@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Poppins" !important;
+}
+
+
+
+table {
+    width: 80%;
+    margin-left: auto; /* Centraliza a tabela horizontalmente */
+    margin-right: auto; /* Centraliza a tabela horizontalmente */
+    text-align: center;
+    font-size: 1.2rem;
+    border-collapse: collapse;
+    border-radius: 20px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+}
+
+table a {
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+table a:hover {
+    background-color: #ccccccab;
+
+}
+
+td,
+th {
+    height: 60px;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #346089;
+    color: #ffffff;
+}
+
+
+tr:nth-child(even) td {
+    color: #ffffff;
+}
+
+.cad a,
+.edit a,
+.delete a,
+.export a {
+    color: #0000;
+}
+
+
+.cad {
+    background-color: #121c4d;
+    color: #fff; /* Define a cor do texto para branco */
+}
+
+.edit {
+    background-color: #ffbb33;
+    color: #000; /* Define a cor do texto para preto */
+}
+
+.delete {
+    background-color: #ff3547;
+    color: #fff; /* Define a cor do texto para branco */
+}
+
+.export {
+    background-color: #3CB371FF;
+    color: #000; /* Define a cor do texto para preto */
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form {
+    margin-right: 10px;
+}
+
+.search-form input {
+    padding: 10px;
+    border: 1px solid #ffffff; /* Adiciona uma borda de 1px sólida na cor branca */
+    border-radius: 10px;
+    background-color: #08223F;
+    color: #ffffff;
+}
+
+.search-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #346089;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.limpar-pesquisa {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #346089;
+    color: #ffffff;
+    text-decoration: none;
+}
