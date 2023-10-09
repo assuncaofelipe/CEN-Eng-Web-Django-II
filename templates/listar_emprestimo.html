@@ -1,43 +1,85 @@
-{% extends 'base.html' %}
-
 {% load static %}
 
-{% block style %}
-        <link rel="stylesheet" href="{% static 'css/tabelas.css' %}" />
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br">
 
-{% block conteudo %}
-<div class="search-container">
-    <form class="search-form" method="GET" action="{% url 'listar_emprestimo' %}">
-        <input type="text" name="search" placeholder="Pesquisar por nome do aluno ou equipamento">
-        <button type="submit">Pesquisar</button>
-    </form>
-    <a class="limpar-pesquisa" href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <title>CEN</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tabelas.css' %}" />
 
-    
-    <table>
-        <thead>
-            <tr>
-                <th colspan="6">Emprestimo</th>
-                <th colspan="2">
-                    <a href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
-                </th>
-            </tr>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Matricula</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Equipamento</th>
-                <th scope="col">Data</th>
-                <th scope="col">Data</th>
-                <th scope="col">Observações</th>
-                <th scope="col">Opções</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for emprestimo in emprestimos %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-brand ">
+                <img src="{% static 'image/logo.svg' %}" width="80px" class="logo">
+            </div>
+            <div class="d-flex navbar-links">
+                <ul class="navbar-menu">
+                    <li><a href="{% url 'listar_equipamento' %}">Equipamentos</a></li>
+                    <li><a href="{% url 'listar_emprestimo' %}">Empréstimo</a></li>
+                    <li><a href="{% url 'logout' %}">Sair</a></li>
+                </ul>
+                <div class="navbar-toggle">
+                    <div id="menu-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h3>Lista de Equipamentos</h3>
+        <div class="search-container">
+            <form class="search-input" method="GET" action="{% url 'listar_emprestimo' %}">
+                <button class="search-button" style="background: #001d3d;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+                <input type="text" name="search" placeholder="Pesquisar..." />
+                <!-- <a class="limpar-pesquisa" href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a> -->
+
+            </form>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn me-md-2 btn-equipamento" type="button" style="background: #001d3d; width: 300px;">
+                    <a style="color: white; text-decoration: none; align-items: center;"
+                        href="{% url 'cadastrar_emprestimo' %}">
+                        Novo emprestimo
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Matricula</th>
+                    <th>Curso</th>
+                    <th>Equipamento</th>
+                    <th>Data</th>
+                    <th>Data</th>
+                    <th>Observações</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprestimo in emprestimos %}
                 <tr>
                     <th scope="row">{{ emprestimo.id_emprestimo }}</th>
                     <td>{{ emprestimo.nome }}</td>
@@ -48,12 +90,34 @@
                     <td>{{ emprestimo.data_devolucao }}</td>
                     <td>{{ emprestimo.observacao }}</td>
                     <td>
-                        <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
-                        <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Excluir</a>
+                        <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </a>
+                        <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-danger btnDel">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                <path
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                            </svg>
+                        </a>
                     </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
 
-{% endblock %}
+    {% block conteudo %}
+    {% endblock %}
+</body>
+
+</html>

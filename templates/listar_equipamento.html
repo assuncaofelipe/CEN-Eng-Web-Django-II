@@ -48,12 +48,15 @@
                     </svg>
                 </button>
                 <input type="text" name="search" placeholder="Pesquisar..." />
+               <!--  <a class="limpar-pesquisa" href="{% url 'listar_equipamento' %}">Limpar pesquisa</a> -->
             </form>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn me-md-2 btn-equipamento" type="button" style="background: #001d3d; width: 300px;">
-                    <a style="color: white; text-decoration: none"
-                        href="{% url 'cadastrar_equipamento' %}">Cadastrar</a>
+                    <a style="color: white; text-decoration: none; align-items: center;"
+                        href="{% url 'cadastrar_equipamento' %}">
+                        Novo equipamento
+                    </a>
                 </button>
             </div>
         </div>
