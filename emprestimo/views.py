@@ -7,75 +7,87 @@ from .models import Emprestimo, Equipamento
 from django.db.models import Q
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class ListarEmprestimo(ListView):
-    template_name = 'listar_emprestimo.html'
+    template_name = "listar_emprestimo.html"
     model = Emprestimo
-    context_object_name = 'emprestimos'
+    context_object_name = "emprestimos"
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        search_query = self.request.GET.get('search')
+        search_query = self.request.GET.get("search")
         if search_query:
             queryset = queryset.filter(
-                Q(nome__icontains=search_query) |
-                Q(equipamento__nome__icontains=search_query)
+                Q(nome__icontains=search_query)
+                | Q(equipamento__nome__icontains=search_query)
             )
         return queryset
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class CadastrarEmprestimo(CreateView):
-    template_name = 'crud_emprestimo.html'
+    template_name = "crud_emprestimo.html"
     model = Emprestimo
-    fields = ['nome', 'matricula', 'curso',
-              'equipamento', 'data_emprestimo',
-              'data_devolucao', 'observacao']
-    success_url = reverse_lazy('listar_emprestimo')
+    fields = [
+        "nome",
+        "matricula",
+        "curso",
+        "equipamento",
+        "data_emprestimo",
+        "data_devolucao",
+        "observacao",
+    ]
+    success_url = reverse_lazy("listar_emprestimo")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Cadastrar"
-        equipamentos_disponiveis = Equipamento.objects.filter(status='1')
+        context["title"] = "Cadastrar"
+        equipamentos_disponiveis = Equipamento.objects.filter(status="1")
         if not equipamentos_disponiveis:
-            context['sem_equipamentos'] = True
+            context["sem_equipamentos"] = True
         return context
 
     def form_valid(self, form):
         form.save(commit=False)
-        equipamento = form.cleaned_data['equipamento']
-        equipamento.status = '0'
+        equipamento = form.cleaned_data["equipamento"]
+        equipamento.status = "0"
         equipamento.save()
         return super().form_valid(form)
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['equipamento'].queryset = Equipamento.objects.filter(status='1')
+        form.fields["equipamento"].queryset = Equipamento.objects.filter(status="1")
         return form
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class EditarEmprestimo(UpdateView):
-    template_name = 'crud_emprestimo.html'
+    template_name = "crud_emprestimo.html"
     model = Emprestimo
-    fields = ['nome', 'matricula', 'curso',
-              'equipamento', 'data_emprestimo',
-              'data_devolucao', 'observacao']
-    success_url = reverse_lazy('listar_emprestimo')
+    fields = [
+        "nome",
+        "matricula",
+        "curso",
+        "equipamento",
+        "data_emprestimo",
+        "data_devolucao",
+        "observacao",
+    ]
+    success_url = reverse_lazy("listar_emprestimo")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Editar"
+        context["title"] = "Editar"
         return context
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class DeletarEmprestimo(DeleteView):
     model = Emprestimo
-    template_name = 'deletar_emprestimo.html'
-    success_url = reverse_lazy('listar_emprestimo')
+    template_name = "deletar_emprestimo.html"
+    success_url = reverse_lazy("listar_emprestimo")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Excluir"
+        context["title"] = "Excluir"
         return context
