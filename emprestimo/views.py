@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Emprestimo, Equipamento
 from django.db.models import Q
+from django import forms
 
 
 @method_decorator(login_required, name="dispatch")
@@ -24,19 +25,44 @@ class ListarEmprestimo(ListView):
         return queryset
 
 
+class DateInput(forms.DateInput):
+    input_type = "date"
+
+
+class CadastrarEmprestimoForm(forms.ModelForm):
+    class Meta:
+        model = Emprestimo
+        fields = [
+            "nome",
+            "matricula",
+            "curso",
+            "equipamento",
+            "data_emprestimo",
+            "data_devolucao",
+            "observacao",
+        ]
+        widgets = {
+            "data_emprestimo": DateInput(format="%d/%m/%Y"),
+            "data_devolucao": DateInput(format="%d/%m/%Y"),
+        }
+
+
+def clean(self):
+    cleaned_data = super().clean()
+    data_emprestimo = cleaned_data.get("data_emprestimo")
+    data_devolucao = cleaned_data.get("data_devolucao")
+
+    if data_emprestimo and data_devolucao and data_devolucao < data_emprestimo:
+        raise forms.ValidationError(
+            "A data de devolução deve ser igual ou maior que a data de início."
+        )
+
+
 @method_decorator(login_required, name="dispatch")
 class CadastrarEmprestimo(CreateView):
     template_name = "crud_emprestimo.html"
     model = Emprestimo
-    fields = [
-        "nome",
-        "matricula",
-        "curso",
-        "equipamento",
-        "data_emprestimo",
-        "data_devolucao",
-        "observacao",
-    ]
+    form_class = CadastrarEmprestimoForm
     success_url = reverse_lazy("listar_emprestimo")
 
     def get_context_data(self, **kwargs):
