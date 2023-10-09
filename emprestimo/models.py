@@ -14,9 +14,8 @@ class Emprestimo(models.Model):
     id_emprestimo = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=250)
     matricula = models.IntegerField(unique=True)
-    curso = models.CharField(
-        choices=curso_opcao, default="0", max_length=2)
+    curso = models.CharField(choices=curso_opcao, default="0", max_length=2)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
-    data_emprestimo = models.DateField('Inicio')
-    data_devolucao = models.DateField('Fim')
-    observacao = models.CharField(max_length=500)
+    data_emprestimo = models.DateField("Inicio")
+    data_devolucao = models.DateField("Fim")
+    observacao = models.CharField(max_length=500, blank=True)

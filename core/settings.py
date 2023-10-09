@@ -120,7 +120,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Login Auth
 
-LOGIN_REDIRECT_URL = 'home'
+# Redirecto to another modules
+LOGIN_REDIRECT_URL = 'equipamentos'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 

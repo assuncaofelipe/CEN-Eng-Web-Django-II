@@ -1,59 +1,87 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-{% block style %}
-        <link rel="stylesheet" href="{% static 'css/tabelas.css' %}" />
-{% endblock %}
-
+{% load crispy_forms_tags %}
 {% block conteudo %}
-<div class="search-container">
-    <form class="search-form" method="GET" action="{% url 'listar_emprestimo' %}">
-        <input type="text" name="search" placeholder="Pesquisar por nome do aluno ou equipamento">
-        <button type="submit">Pesquisar</button>
-    </form>
-    <a class="limpar-pesquisa" href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a>
-</div>
 
-    
-    <table>
-        <thead>
+<div class="container">
+    <h3>Lista de Empréstimos</h3>
+    <div class="search-container">
+        <form class="search-input" method="GET" action="{% url 'listar_emprestimo' %}">
+            <button class="search-button" style="background: #001d3d;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+            </button>
+            <input type="text" name="search" placeholder="Pesquisar..." />
+            <!-- <a class="limpar-pesquisa" href="{% url 'listar_emprestimo' %}">Limpar pesquisa</a> -->
+
+        </form>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn me-md-2 btn-equipamento" type="button" style="background: #001d3d; width: 300px;">
+                <a style="color: white; text-decoration: none; align-items: center;"
+                    href="{% url 'cadastrar_emprestimo' %}">
+                    Novo emprestimo
+                </a>
+            </button>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead class="table-dark">
             <tr>
-                <th colspan="6">Emprestimo</th>
-                <th colspan="2">
-                    <a href="{% url 'cadastrar_emprestimo' %}">Cadastrar</a>
-                </th>
-            </tr>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Matricula</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Equipamento</th>
-                <th scope="col">Data</th>
-                <th scope="col">Data</th>
-                <th scope="col">Observações</th>
-                <th scope="col">Opções</th>
+                <!-- <th>Id</th> -->
+                <th>Nome</th>
+                <th>Matricula</th>
+                <th>Curso</th>
+                <th>Equipamento</th>
+                <th>Data de emprestimo</th>
+                <th>Data de devolução</th>
+                <th>Observações</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
             {% for emprestimo in emprestimos %}
-                <tr>
-                    <th scope="row">{{ emprestimo.id_emprestimo }}</th>
-                    <td>{{ emprestimo.nome }}</td>
-                    <td>{{ emprestimo.matricula }}</td>
-                    <td>{{ emprestimo.get_curso_display }}</td>
-                    <td>{{ emprestimo.equipamento.nome }}</td>
-                    <td>{{ emprestimo.data_emprestimo }}</td>
-                    <td>{{ emprestimo.data_devolucao }}</td>
-                    <td>{{ emprestimo.observacao }}</td>
-                    <td>
-                        <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a>
-                        <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Excluir</a>
-                    </td>
-                </tr>
+            <tr>
+                <!-- <th scope="row">{{ emprestimo.id_emprestimo }}</th> -->
+                <td>{{ emprestimo.nome }}</td>
+                <td>{{ emprestimo.matricula }}</td>
+                <td>{{ emprestimo.get_curso_display }}</td>
+                <td>{{ emprestimo.equipamento.nome }}</td>
+                <td>{{ emprestimo.data_emprestimo }}</td>
+                <td>{{ emprestimo.data_devolucao }}</td>
+                <td>{{ emprestimo.observacao }}</td>
+                <td>
+                    <a href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-danger btnDel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                            <path
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                        </svg>
+                    </a>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
+
 
 {% endblock %}
