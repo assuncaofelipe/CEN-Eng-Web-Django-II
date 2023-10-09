@@ -32,7 +32,7 @@
     <table class="table">
         <thead class="table-dark">
             <tr>
-                <th>Id</th>
+                <!-- <th>Id</th> -->
                 <th>Nome</th>
                 <th>Matricula</th>
                 <th>Curso</th>
@@ -40,13 +40,14 @@
                 <th>Data de emprestimo</th>
                 <th>Data de devolução</th>
                 <th>Observações</th>
-                <th>Opções</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
             {% for emprestimo in emprestimos %}
             <tr>
-                <th scope="row">{{ emprestimo.id_emprestimo }}</th>
+                <!-- <th scope="row">{{ emprestimo.id_emprestimo }}</th> -->
                 <td>{{ emprestimo.nome }}</td>
                 <td>{{ emprestimo.matricula }}</td>
                 <td>{{ emprestimo.get_curso_display }}</td>
@@ -64,6 +65,8 @@
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                         </svg>
                     </a>
+                </td>
+                <td>
                     <a href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-danger btnDel">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-trash" viewBox="0 0 16 16">
