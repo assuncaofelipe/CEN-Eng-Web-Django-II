@@ -45,3 +45,26 @@
 .btn a {
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .search-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items    : start;
+    }
+    .search-input input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1000px) {
+    .search-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items    : start;
+    }
+
+    .search-input input {
+        width: 100%;
+    }
+}
