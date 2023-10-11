@@ -119,7 +119,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Login Auth
-AUTHENTICATION_FORM = 'user.forms.CustomAuthenticationForm'
 
 # Redirecto to another modules
 LOGIN_REDIRECT_URL = 'home'
