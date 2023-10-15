@@ -66,8 +66,8 @@
                 <th>Equipamento</th>
                 <th>Data de emprestimo</th>
                 <th>Data de devolução</th>
+                <th>Status</th>
                 <th>Opções</th>
-                <!-- Editar, Deletar, Ver mais (observações) -->
             </tr>
         </thead>
         <tbody>
@@ -80,9 +80,12 @@
                 <td>{{ emprestimo.equipamento.nome }}</td>
                 <td>{{ emprestimo.data_emprestimo }}</td>
                 <td>{{ emprestimo.data_devolucao }}</td>
-                <!-- <td>{{ emprestimo.status_emprestimo }}</td> -->
+                <td>{{ emprestimo.status_emprestimo_legivel }}</td> <!-- Exibe o status legível -->
 
-                <!-- <td>{{ emprestimo.observacao }}</td> -->
+                <!--
+                    <td>{{ emprestimo.observacao }}</td>
+                    <td>{{ emprestimo.status_emprestimo }}</td>
+                -->
 
                 <td>
                     <div class="dropend">
@@ -102,18 +105,16 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item" data-bs-toggle="modal"
+                                <a class="dropdown-item" data-bs-toggle="modal" style="cursor: pointer;"
                                     data-bs-target="#confirmarDevolucaoModal-{{ emprestimo.id_emprestimo }}">Devolver</a>
                             </li>
 
-                            <!-- 
-                            {% if emprestimo.status_emprestimo == "E" %}
-                                <li><a href="#"></a></li>
-                            {% endif %}
-                                
+                            <!--                               
                                 <li>
                                     <a class="dropdown-item"
-                                    href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Deletar</a></li> -->
+                                    href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Deletar</a>
+                                </li>
+                            -->
                         </ul>
                     </div>
                 </td>

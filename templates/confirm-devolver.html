@@ -13,10 +13,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="{% url 'devolver_emprestimo' emprestimo.id_emprestimo %}" class="btn btn-primary">Confirmar
-                    Devolução</a>
+
+                <form method="POST" action="{% url 'devolver_emprestimo' emprestimo.id_emprestimo %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Confirmar Devolução</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 {% endfor %}
+

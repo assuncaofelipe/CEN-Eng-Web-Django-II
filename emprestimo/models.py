@@ -29,3 +29,6 @@ class Emprestimo(models.Model):
     data_devolucao = models.DateField("Fim")
     observacao = models.CharField(max_length=500, blank=True)
     status_emprestimo = models.CharField(max_length=1, choices=STATUS_EMPRESTIMO_CHOICES, default=EM_ANDAMENTO)
+
+    def status_emprestimo_legivel(self):
+        return "Devolvido" if self.status_emprestimo == Emprestimo.DEVOLVIDO else "Emprestado"

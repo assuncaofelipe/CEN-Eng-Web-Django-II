@@ -8,6 +8,10 @@ from django.db.models import Q
 from django import forms
 from django.http import HttpResponseRedirect
 from django.views import View
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.shortcuts import render
+from django.contrib import messages
 
 @method_decorator(login_required, name="dispatch")
 class ListarEmprestimo(ListView):
@@ -124,11 +128,24 @@ class DeletarEmprestimo(DeleteView):
 
 @method_decorator(login_required, name="dispatch")
 class DevolverEmprestimo(View):
+    def get(self, request, emprestimo_id):
+        emprestimo = get_object_or_404(Emprestimo, id_emprestimo=emprestimo_id)
+        if emprestimo.status_emprestimo == Emprestimo.DEVOLVIDO:
+            messages.error(request, "Este empréstimo já foi devolvido.")
+            return HttpResponseRedirect(reverse("listar_emprestimo"))
+        context = {
+            'emprestimo': emprestimo
+        }
+        return render(request, "listar_emprestimo.html", context)
+
     def post(self, request, emprestimo_id):
         emprestimo = get_object_or_404(Emprestimo, id_emprestimo=emprestimo_id)
         if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
             emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
-            emprestimo.equipamento.status = Equipamento.DISPOSIÇÃO
+            emprestimo.equipamento.status = '1'
             emprestimo.equipamento.save()
             emprestimo.save()
-        return HttpResponseRedirect("listar_emprestimo")
+            messages.success(request, "Empréstimo devolvido com sucesso.")
+        else:
+            messages.error(request, "Este empréstimo não está em andamento.")
+        return HttpResponseRedirect(reverse("listar_emprestimo"))
