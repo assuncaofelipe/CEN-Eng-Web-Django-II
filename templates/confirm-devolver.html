@@ -1,0 +1,26 @@
+<!-- Modal de Confirmação de Devolução -->
+{% for emprestimo in emprestimos %}
+<div class="modal fade" id="confirmarDevolucaoModal-{{ emprestimo.id_emprestimo }}" tabindex="-1" role="dialog"
+    aria-labelledby="confirmarDevolucaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarDevolucaoModalLabel">Confirmar Devolução</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza de que deseja marcar este empréstimo como devolvido?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                <form method="POST" action="{% url 'devolver_emprestimo' emprestimo.id_emprestimo %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Confirmar Devolução</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+

@@ -6,7 +6,12 @@ from django.urls import reverse_lazy
 from .models import Emprestimo, Equipamento
 from django.db.models import Q
 from django import forms
-
+from django.http import HttpResponseRedirect
+from django.views import View
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.shortcuts import render
+from django.contrib import messages
 
 @method_decorator(login_required, name="dispatch")
 class ListarEmprestimo(ListView):
@@ -101,10 +106,13 @@ class EditarEmprestimo(UpdateView):
     ]
     success_url = reverse_lazy("listar_emprestimo")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Editar"
-        return context
+    def form_valid(self, form):
+        emprestimo = form.instance
+        if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
+            emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
+            emprestimo.equipamento.status = Equipamento.DISPOSICAO
+            emprestimo.equipamento.save()
+        return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
@@ -117,3 +125,27 @@ class DeletarEmprestimo(DeleteView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Excluir"
         return context
+
+@method_decorator(login_required, name="dispatch")
+class DevolverEmprestimo(View):
+    def get(self, request, emprestimo_id):
+        emprestimo = get_object_or_404(Emprestimo, id_emprestimo=emprestimo_id)
+        if emprestimo.status_emprestimo == Emprestimo.DEVOLVIDO:
+            messages.error(request, "Este empréstimo já foi devolvido.")
+            return HttpResponseRedirect(reverse("listar_emprestimo"))
+        context = {
+            'emprestimo': emprestimo
+        }
+        return render(request, "listar_emprestimo.html", context)
+
+    def post(self, request, emprestimo_id):
+        emprestimo = get_object_or_404(Emprestimo, id_emprestimo=emprestimo_id)
+        if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
+            emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
+            emprestimo.equipamento.status = '1'
+            emprestimo.equipamento.save()
+            emprestimo.save()
+            messages.success(request, "Empréstimo devolvido com sucesso.")
+        else:
+            messages.error(request, "Este empréstimo não está em andamento.")
+        return HttpResponseRedirect(reverse("listar_emprestimo"))
