@@ -80,6 +80,8 @@
                 <td>{{ emprestimo.equipamento.nome }}</td>
                 <td>{{ emprestimo.data_emprestimo }}</td>
                 <td>{{ emprestimo.data_devolucao }}</td>
+                <!-- <td>{{ emprestimo.status_emprestimo }}</td> -->
+
                 <!-- <td>{{ emprestimo.observacao }}</td> -->
 
                 <td>
@@ -98,8 +100,20 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item"
-                                    href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Deletar</a></li>
+
+                            <li>
+                                <a class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#confirmarDevolucaoModal-{{ emprestimo.id_emprestimo }}">Devolver</a>
+                            </li>
+
+                            <!-- 
+                            {% if emprestimo.status_emprestimo == "E" %}
+                                <li><a href="#"></a></li>
+                            {% endif %}
+                                
+                                <li>
+                                    <a class="dropdown-item"
+                                    href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Deletar</a></li> -->
                         </ul>
                     </div>
                 </td>
@@ -110,5 +124,6 @@
     </table>
 </div>
 
+{% include 'confirm-devolver.html' %}
 
 {% endblock %}

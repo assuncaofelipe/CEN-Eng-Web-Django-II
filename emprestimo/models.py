@@ -3,6 +3,15 @@ from equipamento.models import Equipamento
 
 
 class Emprestimo(models.Model):
+    
+    DEVOLVIDO = 'D'
+    EM_ANDAMENTO = 'E'
+
+    STATUS_EMPRESTIMO_CHOICES = [
+        (DEVOLVIDO, 'Devolvido'),
+        (EM_ANDAMENTO, 'Emprestado'),
+    ]
+
     curso_opcao = [
         ("0", "Engenharia de Software"),
         ("1", "Sistemas de Informação"),
@@ -19,3 +28,4 @@ class Emprestimo(models.Model):
     data_emprestimo = models.DateField("Inicio")
     data_devolucao = models.DateField("Fim")
     observacao = models.CharField(max_length=500, blank=True)
+    status_emprestimo = models.CharField(max_length=1, choices=STATUS_EMPRESTIMO_CHOICES, default=EM_ANDAMENTO)

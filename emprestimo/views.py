@@ -6,7 +6,8 @@ from django.urls import reverse_lazy
 from .models import Emprestimo, Equipamento
 from django.db.models import Q
 from django import forms
-
+from django.http import HttpResponseRedirect
+from django.views import View
 
 @method_decorator(login_required, name="dispatch")
 class ListarEmprestimo(ListView):
@@ -101,10 +102,13 @@ class EditarEmprestimo(UpdateView):
     ]
     success_url = reverse_lazy("listar_emprestimo")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Editar"
-        return context
+    def form_valid(self, form):
+        emprestimo = form.instance
+        if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
+            emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
+            emprestimo.equipamento.status = Equipamento.DISPOSICAO
+            emprestimo.equipamento.save()
+        return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
@@ -117,3 +121,14 @@ class DeletarEmprestimo(DeleteView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Excluir"
         return context
+
+@method_decorator(login_required, name="dispatch")
+class DevolverEmprestimo(View):
+    def post(self, request, emprestimo_id):
+        emprestimo = get_object_or_404(Emprestimo, id_emprestimo=emprestimo_id)
+        if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
+            emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
+            emprestimo.equipamento.status = Equipamento.DISPOSIÇÃO
+            emprestimo.equipamento.save()
+            emprestimo.save()
+        return HttpResponseRedirect("listar_emprestimo")
