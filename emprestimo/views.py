@@ -51,7 +51,6 @@ class CadastrarEmprestimoForm(forms.ModelForm):
             "data_devolucao": DateInput(format="%d/%m/%Y"),
         }
 
-
 def clean(self):
     cleaned_data = super().clean()
     data_emprestimo = cleaned_data.get("data_emprestimo")
@@ -65,7 +64,7 @@ def clean(self):
 
 @method_decorator(login_required, name="dispatch")
 class CadastrarEmprestimo(CreateView):
-    template_name = "crud_emprestimo.html"
+    template_name = "novo_emprestimo.html"
     model = Emprestimo
     form_class = CadastrarEmprestimoForm
     success_url = reverse_lazy("listar_emprestimo")
@@ -93,7 +92,7 @@ class CadastrarEmprestimo(CreateView):
 
 @method_decorator(login_required, name="dispatch")
 class EditarEmprestimo(UpdateView):
-    template_name = "crud_emprestimo.html"
+    template_name = "edit_emprestimo.html"
     model = Emprestimo
     fields = [
         "nome",
@@ -105,6 +104,17 @@ class EditarEmprestimo(UpdateView):
         "observacao",
     ]
     success_url = reverse_lazy("listar_emprestimo")
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Desabilitar o campo "status" para edição
+        form.fields["nome"].widget.attrs["disabled"] = True        
+        form.fields["matricula"].widget.attrs["disabled"] = True
+        form.fields["curso"].widget.attrs["disabled"] = True
+        form.fields["equipamento"].widget.attrs["disabled"] = True
+        form.fields["data_emprestimo"].widget.attrs["disabled"] = True
+
+        return form
 
     def form_valid(self, form):
         emprestimo = form.instance

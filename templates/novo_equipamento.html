@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 {% block conteudo %}
 
-<div class="container">
+<div class="container" style="width: 750px;">
     <form method="post">
-        <h2>{{ title }} Empréstimo</h2>
-
-        {% if sem_equipamentos %}
-        <p>Não há equipamentos disponíveis no momento.</p>
-        {% else %}
-
+        <h1>{{ title }} Equipamento</h1>
         {% csrf_token %}
+
+        <p style="color: red; margin-bottom: 30px; margin-top: 30px;">
+            (*) Campo Obrigatório
+        </p>
+
         {{ form|crispy }}
 
         <div class="actions"
             style="display: flex; font-display: row; align-items: center; justify-content: flex-start; margin-top: 30px;">
 
-            <a href="{% url 'listar_emprestimo' %}" class="btn me-md-2 btn-equipamento" type="submit" style="width: 300px; 
+            <a href="{% url 'listar_equipamento' %}" class="btn me-md-2 btn-equipamento" type="submit" style="width: 300px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -53,10 +52,9 @@
                     <path
                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
-                Editar
+                Cadastrar
             </button>
         </div>
-        {% endif %}
     </form>
 </div>
 

@@ -7,58 +7,61 @@ from .models import Equipamento
 from django.db.models import Q
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class ListarEquipamento(ListView):
-    template_name = 'listar_equipamento.html'
+    template_name = "listar_equipamento.html"
     model = Equipamento
-    context_object_name = 'equipamentos'
+    context_object_name = "equipamentos"
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        search_query = self.request.GET.get('search')
+        search_query = self.request.GET.get("search")
         if search_query:
             queryset = queryset.filter(
-                Q(nome__icontains=search_query) |
-                Q(codigo__icontains=search_query)
+                Q(nome__icontains=search_query) | Q(codigo__icontains=search_query)
             )
         return queryset
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class CadastrarEquipamento(CreateView):
-    template_name = 'crud_equipamento.html'
+    template_name = "novo_equipamento.html"
     model = Equipamento
-    fields = ['nome', 'patrimonio', 'codigo',
-              'situacao', 'observacao', 'status']
-    success_url = reverse_lazy('listar_equipamento')
+    fields = ["nome", "patrimonio", "codigo", "situacao", "observacao", "status"]
+    success_url = reverse_lazy("listar_equipamento")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Cadastrar"
+        context["title"] = "Cadastrar"
         return context
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class EditarEquipamento(UpdateView):
-    template_name = 'crud_equipamento.html'
+    template_name = "edit_equipamento.html"
     model = Equipamento
-    fields = ['nome', 'patrimonio', 'codigo',
-              'situacao', 'observacao', 'status']
-    success_url = reverse_lazy('listar_equipamento')
+    fields = ["nome", "patrimonio", "codigo", "situacao", "observacao", "status"]
+    success_url = reverse_lazy("listar_equipamento")
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Desabilitar o campo "status" para edição
+        form.fields["status"].widget.attrs["disabled"] = True
+        return form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Editar"
+        context["title"] = "Editar"
         return context
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class DeletarEquipamento(DeleteView):
     model = Equipamento
-    template_name = 'deletar_equipamento.html'
-    success_url = reverse_lazy('listar_equipamento')
+    template_name = "deletar_equipamento.html"
+    success_url = reverse_lazy("listar_equipamento")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Excluir"
+        context["title"] = "Excluir"
         return context
