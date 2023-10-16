@@ -24,7 +24,7 @@ class Emprestimo(models.Model):
     curso = models.CharField(choices=curso_opcao, default="0", max_length=2, verbose_name="Curso")
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, verbose_name="Equipamento")
     data_emprestimo = models.DateField(verbose_name="Data de Empréstimo", default=timezone.now)
-    data_devolucao = models.DateField(verbose_name="Data de DEvolução")
+    data_devolucao = models.DateField(verbose_name="Data de Devolução")
     observacao = models.CharField(max_length=500, blank=True, verbose_name="Observações")
     status_emprestimo = models.CharField(max_length=1, choices=STATUS_EMPRESTIMO_CHOICES, default=EM_ANDAMENTO)
 
