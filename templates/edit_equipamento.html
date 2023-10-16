@@ -3,11 +3,15 @@
 {% load crispy_forms_tags %}
 {% block conteudo %}
 
-<div class="container">
+<div class="container" style="width: 750px;">
     <form method="post">
         <h1>{{ title }} Equipamento</h1>
         {% csrf_token %}
+        <p style="color: red; margin-bottom: 30px; margin-top: 30px;">
+            (*) Campo Obrigatório
+        </p>
         {{ form|crispy }}
+
 
         <div class="actions"
             style="display: flex; font-display: row; align-items: center; justify-content: flex-start; margin-top: 30px;">
