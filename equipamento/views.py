@@ -20,6 +20,9 @@ class ListarEquipamento(ListView):
             queryset = queryset.filter(
                 Q(nome__icontains=search_query) | Q(codigo__icontains=search_query)
             )
+            queryset = queryset.order_by('-created_at')
+
+        queryset = queryset.order_by('-created_at')
         return queryset
 
 
@@ -45,8 +48,10 @@ class EditarEquipamento(UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        # Desabilitar o campo "status" para edição
-        form.fields["status"].widget.attrs["disabled"] = True
+        if self.object.status != '1':
+            form.fields["status"].required = False
+            form.fields["status"].widget.attrs["disabled"] = True
+
         return form
 
     def get_context_data(self, **kwargs):

@@ -27,6 +27,7 @@ class ListarEmprestimo(ListView):
                 Q(nome__icontains=search_query)
                 | Q(equipamento__nome__icontains=search_query)
             )
+        queryset = queryset.order_by('-created_at')
         return queryset
 
 
