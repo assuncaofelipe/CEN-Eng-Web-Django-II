@@ -35,6 +35,23 @@
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <form method="get" class="form-inline" id="statusFilterForm">
+                <div class="form-group">
+                    <select name="status_filter" id="status_ilter" class="form-control" onchange="submitForm()" style="width: 120px; 
+                        column-gap: 8px; 
+                        color: white; 
+                        height: 44px; 
+                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
+                        onmouseout="this.style.background='#001d3d'">
+
+                        <option value="">Filtrar</option>
+                        <option value="todos" {% if request.GET.status_filter == 'todos' %}selected{% endif %}>Todos</option>
+                        <option value="emprestado" {% if request.GET.status_filter == 'emprestado' %}selected{% endif %}>Emprestado</option>
+                        <option value="devolvido" {% if request.GET.status_filter == 'devolvido' %}selected{% endif %}>Devolvido</option>
+
+                    </select>
+                </div>
+            </form>
             <a href="{% url 'cadastrar_emprestimo' %}" class="btn me-md-2 btn-equipamento" type="button" style="width: 300px; 
                     display: flex; 
                     align-items: center; 
@@ -53,24 +70,6 @@
                 </svg>
                 Novo Empréstimo
             </a>
-
-            <form method="get" class="form-inline" id="statusFilterForm">
-                <div class="form-group">
-                    <select name="status_filter" id="status_ilter" class="form-control" onchange="submitForm()" style="width: 120px; 
-                        column-gap: 8px; 
-                        color: white; 
-                        height: 44px; 
-                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
-                        onmouseout="this.style.background='#001d3d'">
-
-                        <option value="">Filtrar</option>
-                        <option value="todos" {% if request.GET.status_filter == 'todos' %}selected{% endif %}>Todos</option>
-                        <option value="emprestado" {% if request.GET.status_filter == 'emprestado' %}selected{% endif %}>Emprestado</option>
-                        <option value="devolvido" {% if request.GET.status_filter == 'devolvido' %}selected{% endif %}>Devolvido</option>
-
-                    </select>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -84,7 +83,7 @@
                 <th>Equipamento</th>
                 <th>Data de Empréstimo</th>
                 <th>Data de Devolução</th>
-                <th>Status</th>
+                <th>Disponibilidade</th>
                 <th>Opções</th>
             </tr>
         </thead>
@@ -117,7 +116,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item"
                                     href="{% url 'editar_emprestimo' emprestimo.id_emprestimo %}">Editar</a></li>
-                            <li><a class="dropdown-item" href="#">Observações</a></li>
+                            <li><a class="dropdown-item" style="cursor: pointer;" data-bs-toggle="modal"
+                                data-bs-target="#observacoesModal">Observações</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -126,13 +126,6 @@
                                 <a class="dropdown-item" data-bs-toggle="modal" style="cursor: pointer;"
                                     data-bs-target="#confirmarDevolucaoModal-{{ emprestimo.id_emprestimo }}">Devolver</a>
                             </li>
-
-                            <!--                               
-                                <li>
-                                    <a class="dropdown-item"
-                                    href="{% url 'deletar_emprestimo' emprestimo.id_emprestimo %}">Deletar</a>
-                                </li>
-                            -->
                         </ul>
                     </div>
                 </td>
@@ -149,5 +142,6 @@
 </script>
 
 {% include 'confirm_devolver.html' %}
+{% include 'detalhes_modal.html' %}
 
 {% endblock %}

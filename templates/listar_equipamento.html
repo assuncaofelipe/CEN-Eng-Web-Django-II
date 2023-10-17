@@ -34,6 +34,22 @@
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <form method="get" class="form-inline" id="statusFilterForm">
+                <div class="form-group">
+                    <select name="status_filter" id="status_filter" class="form-control" onchange="submitForm()" style="width: 120px; 
+                        column-gap: 8px; 
+                        color: white; 
+                        height: 44px; 
+                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
+                        onmouseout="this.style.background='#001d3d'">
+
+                        <option value="">Filtrar</option>
+                        <option value="todos">Todos</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="indisponivel">Indisponível</option>
+                    </select>
+                </div>
+            </form>
             <a href="{% url 'cadastrar_equipamento' %}" class="btn me-md-2 btn-equipamento" type="button" style="width: 300px; 
                     display: flex; 
                     align-items: center; 
@@ -52,22 +68,6 @@
                 </svg>
                 Novo Equipamento
             </a>
-            <form method="get" class="form-inline" id="statusFilterForm">
-                <div class="form-group">
-                    <select name="status_filter" id="status_filter" class="form-control" onchange="submitForm()" style="width: 120px; 
-                        column-gap: 8px; 
-                        color: white; 
-                        height: 44px; 
-                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
-                        onmouseout="this.style.background='#001d3d'">
-
-                        <option value="">Filtrar</option>
-                        <option value="todos">Todos</option>
-                        <option value="disponivel">Disponível</option>
-                        <option value="indisponivel">Indisponível</option>
-                    </select>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -80,7 +80,7 @@
                 <th>Código</th>
                 <th>Situação</th>
                 <!--  <th>Observação</th> -->
-                <th>Status</th>
+                <th>Disponibilidade</th>
                 <th>Opções</th>
             </tr>
         </thead>
