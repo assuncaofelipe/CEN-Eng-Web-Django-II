@@ -22,11 +22,19 @@ class ListarEmprestimo(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get("search")
+        status_filter = self.request.GET.get("status_filter")
+
         if search_query:
             queryset = queryset.filter(
                 Q(nome__icontains=search_query)
                 | Q(equipamento__nome__icontains=search_query)
             )
+        
+        if status_filter == 'emprestado':
+            queryset = queryset.filter(status_emprestimo=Emprestimo.EM_ANDAMENTO)
+        elif status_filter == 'devolvido':
+            queryset = queryset.filter(status_emprestimo=Emprestimo.DEVOLVIDO)
+
         queryset = queryset.order_by('-created_at')
         return queryset
 
@@ -109,20 +117,22 @@ class EditarEmprestimo(UpdateView):
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
         # Desabilitar o campo "status" para edição
-        form.fields["nome"].widget.attrs["disabled"] = True        
-        form.fields["matricula"].widget.attrs["disabled"] = True
-        form.fields["curso"].widget.attrs["disabled"] = True
-        form.fields["equipamento"].widget.attrs["disabled"] = True
-        form.fields["data_emprestimo"].widget.attrs["disabled"] = True
-
+        form.fields["nome"].widget.attrs["ready"] = True
+        form.fields["matricula"].widget.attrs["ready"] = True
+        form.fields["curso"].widget.attrs["ready"] = True
+        form.fields["equipamento"].widget.attrs["ready"] = True
+        form.fields["data_emprestimo"].widget.attrs["ready"] = True
+        
         return form
 
     def form_valid(self, form):
         emprestimo = form.instance
         if emprestimo.status_emprestimo == Emprestimo.EM_ANDAMENTO:
-            emprestimo.status_emprestimo = Emprestimo.DEVOLVIDO
-            emprestimo.equipamento.status = Equipamento.DISPOSICAO
+            emprestimo.status_emprestimo = Emprestimo.EM_ANDAMENTO
+            # emprestimo.equipamento.status = Equipamento.DISPOSICAO
             emprestimo.equipamento.save()
+        else:
+            emprestimo.status_emprestimo == Emprestimo.DEVOLVIDO
         return super().form_valid(form)
 
 
