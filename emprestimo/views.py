@@ -22,11 +22,19 @@ class ListarEmprestimo(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get("search")
+        status_filter = self.request.GET.get("status_filter")
+
         if search_query:
             queryset = queryset.filter(
                 Q(nome__icontains=search_query)
                 | Q(equipamento__nome__icontains=search_query)
             )
+        
+        if status_filter == 'emprestado':
+            queryset = queryset.filter(status_emprestimo=Emprestimo.EM_ANDAMENTO)
+        elif status_filter == 'devolvido':
+            queryset = queryset.filter(status_emprestimo=Emprestimo.DEVOLVIDO)
+
         queryset = queryset.order_by('-created_at')
         return queryset
 

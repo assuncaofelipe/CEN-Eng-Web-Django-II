@@ -53,6 +53,24 @@
                 </svg>
                 Novo Empréstimo
             </a>
+
+            <form method="get" class="form-inline" id="statusFilterForm">
+                <div class="form-group">
+                    <select name="status_filter" id="status_ilter" class="form-control" onchange="submitForm()" style="width: 120px; 
+                        column-gap: 8px; 
+                        color: white; 
+                        height: 44px; 
+                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
+                        onmouseout="this.style.background='#001d3d'">
+
+                        <option value="">Filtrar</option>
+                        <option value="todos" {% if request.GET.status_filter == 'todos' %}selected{% endif %}>Todos</option>
+                        <option value="emprestado" {% if request.GET.status_filter == 'emprestado' %}selected{% endif %}>Emprestado</option>
+                        <option value="devolvido" {% if request.GET.status_filter == 'devolvido' %}selected{% endif %}>Devolvido</option>
+
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -124,7 +142,12 @@
         </tbody>
     </table>
 </div>
+<script>
+    function submitForm() {
+        document.getElementById("statusFilterForm").submit();
+    }
+</script>
 
-{% include 'confirm-devolver.html' %}
+{% include 'confirm_devolver.html' %}
 
 {% endblock %}
