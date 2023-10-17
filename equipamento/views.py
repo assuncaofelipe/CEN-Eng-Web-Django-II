@@ -55,15 +55,6 @@ class EditarEquipamento(UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields["nome"].required = False
-        form.fields["nome"].widget.attrs["disabled"] = True
-        form.fields["patrimonio"].required = False
-        form.fields["patrimonio"].widget.attrs["disabled"] = True
-        form.fields["codigo"].required = False
-        form.fields["codigo"].widget.attrs["disabled"] = True
-        form.fields["patrimonio"].widget.attrs["disabled"] = True
-        form.fields["status"].required = False
-        form.fields["status"].widget.attrs["disabled"] = True
 
         if self.object.status != '1':
             form.fields["status"].required = False
