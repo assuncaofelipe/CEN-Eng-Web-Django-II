@@ -69,7 +69,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 
     <table class="table table-bordered text-center mt-3 mb-5" id="dataTableEquipamento">
@@ -107,16 +106,18 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item"
                                     href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a></li>
-                            <li><a class="dropdown-item" href="#">Observações</a></li>
-                            <!--                             <li>
+                            <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a href="{% url 'deletar_equipamento' equipamento.id_equipamento %}"
-                                    class="dropdown-item">Deletar</a></li> -->
+                            <li>
+                                <a class="dropdown-item" style="cursor: pointer;" data-bs-toggle="modal"
+                                    data-bs-target="#observacoesModal">Observações</a>
+                            </li>
+
                         </ul>
                     </div>
-
                 </td>
+
             </tr>
             {% endfor %}
         </tbody>
@@ -129,4 +130,5 @@
     }
 </script>
 
+{% include 'detalhes_modal.html' %}
 {% endblock %}
