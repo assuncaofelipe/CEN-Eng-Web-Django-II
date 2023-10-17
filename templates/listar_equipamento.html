@@ -29,6 +29,8 @@
                         d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                 </svg>
             </a>
+
+
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -50,13 +52,26 @@
                 </svg>
                 Novo Equipamento
             </a>
+            <form method="get" class="form-inline" id="statusFilterForm">
+                <div class="form-group">
+                    <select name="status_filter" id="status_filter" class="form-control" onchange="submitForm()" style="width: 120px; 
+                        column-gap: 8px; 
+                        color: white; 
+                        height: 44px; 
+                        background: #001d3d;" onmouseover="this.style.background='#18436B'"
+                        onmouseout="this.style.background='#001d3d'">
+
+                        <option value="">Filtrar</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="indisponivel">Indisponível</option>
+                    </select>
+                </div>
+            </form>
         </div>
+
     </div>
 
-    <div class="modal-dialog modal-dialog-centered mt-3">
-    </div>
-
-    <table class="table table-bordered text-center" id="dataTableEquipamento">
+    <table class="table table-bordered text-center mt-3" id="dataTableEquipamento">
         <thead class="table-dark">
             <tr>
                 <!-- <th>Id</th> -->
@@ -92,7 +107,7 @@
                             <li><a class="dropdown-item"
                                     href="{% url 'editar_equipamento' equipamento.id_equipamento %}">Editar</a></li>
                             <li><a class="dropdown-item" href="#">Observações</a></li>
-<!--                             <li>
+                            <!--                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a href="{% url 'deletar_equipamento' equipamento.id_equipamento %}"
@@ -106,5 +121,11 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function submitForm() {
+        document.getElementById("statusFilterForm").submit();
+    }
+</script>
 
 {% endblock %}

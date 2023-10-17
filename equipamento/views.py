@@ -16,11 +16,18 @@ class ListarEquipamento(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get("search")
+        status_filter = self.request.GET.get("status_filter")
+
         if search_query:
             queryset = queryset.filter(
                 Q(nome__icontains=search_query) | Q(codigo__icontains=search_query)
             )
             queryset = queryset.order_by('-created_at')
+
+        if status_filter == "disponivel":
+            queryset = queryset.filter(status="1")
+        elif status_filter == "indisponivel":
+            queryset = queryset.filter(status="0")
 
         queryset = queryset.order_by('-created_at')
         return queryset
