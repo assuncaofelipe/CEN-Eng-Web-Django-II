@@ -17,7 +17,7 @@ class Equipamento(models.Model):
     nome = models.CharField(max_length=50, verbose_name="Nome do Equipamento")
     patrimonio = models.CharField(unique=False, max_length=50, blank=True, verbose_name="Patrimônio")
     codigo = models.CharField(unique=True, max_length=50, verbose_name="Código do Equipamento")
-    situacao = models.CharField(choices=situacao_opcao, default="1", max_length=2, verbose_name="Situação do equipamento")
+    situacao = models.CharField(choices=situacao_opcao, default="1", max_length=2, verbose_name="Situação do Equipamento")
     observacao = models.CharField(max_length=150, blank=True, verbose_name="Observações")
     status = models.CharField(choices=status_opcao, default="1", max_length=2, verbose_name="Disponibilidade")
     created_at = models.DateTimeField(default=timezone.now)
