@@ -31,6 +31,14 @@
     color          : #fff;
 }
 
+.navbar-menu a:hover {
+    border-bottom: 3px solid #31B3CD;
+}
+
+.navbar-menu a.active {
+    border-bottom: 3px solid #31B3CD;
+}
+
 .navbar-toggle {
     display: none;
 }

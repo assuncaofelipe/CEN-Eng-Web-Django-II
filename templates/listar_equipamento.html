@@ -40,13 +40,14 @@
                         column-gap: 8px; 
                         color: white; 
                         height: 44px; 
+                        border: none; 
                         background: #001d3d;" onmouseover="this.style.background='#18436B'"
                         onmouseout="this.style.background='#001d3d'">
 
-                        <option value="">Filtrar</option>
-                        <option value="todos">Todos</option>
-                        <option value="disponivel">Disponível</option>
-                        <option value="indisponivel">Indisponível</option>
+                        <option style="border: none;" value="">Filtrar</option>
+                        <option style="border: none;" value="todos">Todos</option>
+                        <option style="border: none;" value="disponivel">Disponível</option>
+                        <option style="border: none;" value="indisponivel">Indisponível</option>
                     </select>
                 </div>
             </form>
@@ -130,5 +131,5 @@
     }
 </script>
 
-{% include 'detalhes_modal.html' %}
+{% include 'modal/detalhes_modal.html' %}
 {% endblock %}
