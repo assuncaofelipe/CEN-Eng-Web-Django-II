@@ -40,14 +40,15 @@
                     <select name="status_filter" id="status_ilter" class="form-control" onchange="submitForm()" style="width: 120px; 
                         column-gap: 8px; 
                         color: white; 
-                        height: 44px; 
+                        height: 44px;
+                        border: none;  
                         background: #001d3d;" onmouseover="this.style.background='#18436B'"
                         onmouseout="this.style.background='#001d3d'">
 
-                        <option value="">Filtrar</option>
-                        <option value="todos" {% if request.GET.status_filter == 'todos' %}selected{% endif %}>Todos</option>
-                        <option value="emprestado" {% if request.GET.status_filter == 'emprestado' %}selected{% endif %}>Emprestado</option>
-                        <option value="devolvido" {% if request.GET.status_filter == 'devolvido' %}selected{% endif %}>Devolvido</option>
+                        <option style="border: none;" value="">Filtrar</option>
+                        <option style="border: none;" value="todos" {% if request.GET.status_filter == 'todos' %}selected{% endif %}>Todos</option>
+                        <option style="border: none;" value="emprestado" {% if request.GET.status_filter == 'emprestado' %}selected{% endif %}>Emprestado</option>
+                        <option style="border: none;" value="devolvido" {% if request.GET.status_filter == 'devolvido' %}selected{% endif %}>Devolvido</option>
 
                     </select>
                 </div>
@@ -58,7 +59,8 @@
                     justify-content: center; 
                     column-gap: 8px; 
                     color: white; 
-                    height: 44px; 
+                    height: 44px;
+                    border: none; 
                     background: #001d3d;" onmouseover="this.style.background='#18436B'"
                 onmouseout="this.style.background='#001d3d'">
 
@@ -141,7 +143,7 @@
     }
 </script>
 
-{% include 'confirm_devolver.html' %}
-{% include 'detalhes_modal.html' %}
+{% include 'modal/confirm_devolver.html' %}
+{% include 'modal/detalhes_modal.html' %}
 
 {% endblock %}

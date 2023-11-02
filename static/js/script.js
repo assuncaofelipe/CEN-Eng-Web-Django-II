@@ -5,4 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   menuToggle.addEventListener("click", function () {
     navbarMenu.classList.toggle("active");
   });
+
+  const navbarLinks = document.querySelectorAll(".navbar-links a");
+  const currentURL = window.location.pathname;
+
+  navbarLinks.forEach(link => {
+      const linkURL = link.getAttribute("href");
+
+      if (currentURL === linkURL) {
+          link.classList.add("active");
+      }
+  });
 });
