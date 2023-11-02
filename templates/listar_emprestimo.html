@@ -40,7 +40,8 @@
                     <select name="status_filter" id="status_ilter" class="form-control" onchange="submitForm()" style="width: 120px; 
                         column-gap: 8px; 
                         color: white; 
-                        height: 44px; 
+                        height: 44px;
+                        border: none;  
                         background: #001d3d;" onmouseover="this.style.background='#18436B'"
                         onmouseout="this.style.background='#001d3d'">
 
@@ -58,7 +59,8 @@
                     justify-content: center; 
                     column-gap: 8px; 
                     color: white; 
-                    height: 44px; 
+                    height: 44px;
+                    border: none; 
                     background: #001d3d;" onmouseover="this.style.background='#18436B'"
                 onmouseout="this.style.background='#001d3d'">
 
@@ -129,7 +131,16 @@
                         </ul>
                     </div>
                 </td>
-
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">
+                    {% if empty_search_message %}
+                    {{ empty_search_message }}
+                    {% else %}
+                    Nenhum empréstimo encontrado.
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
